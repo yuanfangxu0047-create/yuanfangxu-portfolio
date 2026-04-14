@@ -532,7 +532,7 @@
           </div>
         </div>
         <div class="panel contact-qrcode">
-          <img id="siteQr" src="./yuan_fangxu_contact_qr.png" alt="个人网站二维码" />
+          <img id="siteQr" alt="个人网站二维码" />
         </div>
       </div>
     </div>
@@ -543,19 +543,29 @@
   </footer>
 
   <script>
-    function copyText(text, message) {
-      navigator.clipboard.writeText(text).then(() => {
-        alert(message);
-      }).catch(() => {
-        const temp = document.createElement('textarea');
-        temp.value = text;
-        document.body.appendChild(temp);
-        temp.select();
-        document.execCommand('copy');
-        document.body.removeChild(temp);
-        alert(message);
-      });
-    }
-  </script>
-</body>
-</html>
+  const BASE_URL = window.location.origin + window.location.pathname.replace(/index\.html$/, '').replace(/\/$/, '');
+
+  function copyText(text, message) {
+    navigator.clipboard.writeText(text).then(() => {
+      alert(message);
+    }).catch(() => {
+      const temp = document.createElement('textarea');
+      temp.value = text;
+      document.body.appendChild(temp);
+      temp.select();
+      document.execCommand('copy');
+      document.body.removeChild(temp);
+      alert(message);
+    });
+  }
+
+  const PUBLIC_URL = BASE_URL + '/';
+  const QR_URL = BASE_URL + '/qr';
+
+  const qrImg = document.getElementById('siteQr');
+  if (qrImg) {
+    qrImg.src =
+      'https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=' +
+      encodeURIComponent(QR_URL);
+  }
+</script>

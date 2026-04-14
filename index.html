@@ -1,0 +1,561 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>袁方旭｜AI产品方向个人网站</title>
+  <meta name="description" content="袁方旭个人网站：AI产品实习生方向，聚焦Agent场景调研、Prompt工具化、数据分析与研究支持。" />
+  <style>
+    :root {
+      --bg: #f7f8fc;
+      --card: rgba(255,255,255,.86);
+      --text: #162136;
+      --muted: #5c667a;
+      --line: #dde4f0;
+      --accent: #2b63ff;
+      --accent-2: #6c7cff;
+      --accent-soft: rgba(43,99,255,.08);
+      --good: #1f7a52;
+      --shadow: 0 18px 40px rgba(28, 46, 89, 0.10);
+      --radius: 22px;
+      --maxw: 1220px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans CJK SC", sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 8% 10%, rgba(43,99,255,.10), transparent 28%),
+        radial-gradient(circle at 92% 12%, rgba(108,124,255,.10), transparent 24%),
+        linear-gradient(180deg, #fafbff 0%, #f3f6fb 100%);
+      line-height: 1.65;
+    }
+    a { color: inherit; text-decoration: none; }
+    .container { width: min(var(--maxw), calc(100% - 32px)); margin: 0 auto; }
+
+    .topbar {
+      position: sticky; top: 0; z-index: 30;
+      backdrop-filter: blur(14px);
+      background: rgba(247,248,252,.76);
+      border-bottom: 1px solid rgba(221,228,240,.8);
+    }
+    .nav {
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 20px; padding: 14px 0;
+    }
+    .brand { font-weight: 800; letter-spacing: .02em; font-size: 20px; white-space: nowrap; }
+    .nav-links {
+      display: flex; flex-wrap: nowrap; gap: 8px;
+      align-items: center; justify-content: flex-end; overflow-x: auto; white-space: nowrap; -webkit-overflow-scrolling: touch;
+    }
+    .nav-links a {
+      font-size: 14px; color: var(--muted);
+      padding: 8px 12px; border-radius: 999px; white-space: nowrap;
+      transition: .2s ease;
+    }
+    .nav-links a:hover { background: var(--accent-soft); color: var(--accent); }
+
+    .hero { padding: 52px 0 22px; }
+    .hero-grid {
+      display: grid; grid-template-columns: 1.2fr .8fr; gap: 22px; align-items: stretch;
+    }
+    .panel {
+      background: var(--card);
+      border: 1px solid rgba(221,228,240,.92);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(12px);
+    }
+    .hero-main { padding: 36px; }
+    .eyebrow {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 8px 14px; border-radius: 999px;
+      background: var(--accent-soft); color: var(--accent);
+      font-size: 13px; font-weight: 700; margin-bottom: 16px;
+    }
+    h1 {
+      margin: 0 0 10px; font-size: clamp(38px, 5.2vw, 64px);
+      line-height: 1.04; letter-spacing: -0.04em;
+    }
+    .subtitle {
+      margin: 0 0 10px; font-size: clamp(17px, 2.3vw, 27px);
+      color: #2b3447; font-weight: 700; white-space: nowrap; overflow-x: auto;
+    }
+    .hero-summary {
+      margin: 0 0 14px; font-size: 16px; color: #3a4560; max-width: 760px;
+    }
+    .quick-tags { display: flex; flex-wrap: wrap; gap: 10px; margin: 16px 0 0; }
+    .quick-tag {
+      padding: 9px 12px; border-radius: 999px; font-size: 13px; font-weight: 700;
+      background: rgba(255,255,255,.88); border: 1px solid var(--line); color: #31415c;
+    }
+    .hero-actions { margin-top: 24px; display: flex; flex-wrap: wrap; gap: 12px; }
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+      padding: 13px 18px; border-radius: 14px; font-weight: 700; font-size: 14px;
+      border: 1px solid transparent; cursor: pointer; transition: .2s ease;
+      background: transparent;
+    }
+    .btn:hover { transform: translateY(-1px); }
+    .btn.primary {
+      background: linear-gradient(135deg, var(--accent), var(--accent-2)); color: #fff;
+      box-shadow: 0 10px 24px rgba(43,99,255,.24);
+    }
+    .btn.secondary { background: #fff; color: var(--text); border-color: var(--line); }
+    .hero-side { padding: 24px; display: grid; gap: 14px; }
+    .hero-side h3 { margin: 0 0 10px; font-size: 14px; color: var(--muted); }
+    .contact-card, .mini-card {
+      padding: 18px; border-radius: 18px; background: rgba(255,255,255,.84); border: 1px solid var(--line);
+    }
+    .contact-list { display: grid; gap: 10px; }
+    .contact-item { padding: 11px 12px; border-radius: 14px; background: rgba(247,248,252,.86); border: 1px solid var(--line); }
+    .contact-label { font-size: 12px; color: var(--muted); margin-bottom: 2px; }
+    .contact-value { font-size: 15px; font-weight: 700; word-break: break-all; }
+    .contact-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+
+    .mini-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+    .mini-number { font-size: 30px; font-weight: 800; line-height: 1; margin-bottom: 6px; color: var(--accent); }
+    .mini-text { font-size: 13px; color: var(--muted); }
+
+    section { padding: 18px 0; }
+    .section-head {
+      display: flex; align-items: end; justify-content: space-between; gap: 16px; margin-bottom: 16px;
+    }
+    .section-title { margin: 0; font-size: clamp(24px, 3.1vw, 40px); letter-spacing: -0.03em; white-space: nowrap; }
+    .section-note { color: var(--muted); font-size: 14px; }
+
+    .cards, .feature-grid, .fit-grid { display: grid; gap: 16px; }
+    .feature-grid { grid-template-columns: repeat(2, 1fr); }
+    .fit-grid { grid-template-columns: repeat(3, 1fr); }
+    .card { padding: 24px; }
+    .feature-card { padding: 24px; }
+    .fit-card { padding: 22px; }
+    .fit-card h3, .feature-card h3 { margin: 0 0 8px; font-size: 20px; line-height: 1.25; }
+    .fit-card p, .feature-card p { margin: 0; color: #34415c; font-size: 15px; }
+    .highlight-row { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 14px; }
+    .badge {
+      padding: 8px 12px; border-radius: 999px; font-size: 12px; font-weight: 800;
+      background: rgba(43,99,255,.08); color: #244fca; border: 1px solid rgba(43,99,255,.14);
+    }
+
+    .item-head { display: flex; justify-content: space-between; align-items: start; gap: 18px; margin-bottom: 10px; }
+    .item-title { margin: 0; font-size: 22px; line-height: 1.22; }
+    .item-meta { color: var(--muted); font-size: 14px; text-align: right; white-space: nowrap; }
+    .item-desc { margin: 0 0 12px; color: #2e3953; font-size: 15px; font-weight: 650; }
+    .metric-row { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 14px; }
+    .metric {
+      padding: 8px 12px; border-radius: 999px; background: rgba(31,122,82,.08); color: var(--good);
+      border: 1px solid rgba(31,122,82,.16); font-weight: 800; font-size: 12px;
+    }
+    .bullet-list { margin: 0; padding-left: 18px; display: grid; gap: 8px; }
+    .bullet-list li { color: #33405a; }
+    .bullet-list strong { color: var(--text); }
+
+    .timeline { position: relative; }
+    .timeline::before {
+      content: ""; position: absolute; left: 16px; top: 8px; bottom: 8px; width: 2px;
+      background: linear-gradient(180deg, rgba(43,99,255,.35), rgba(43,99,255,.08));
+    }
+    .timeline-item { position: relative; padding-left: 46px; margin-bottom: 18px; }
+    .timeline-item:last-child { margin-bottom: 0; }
+    .timeline-item::before {
+      content: ""; position: absolute; left: 8px; top: 8px; width: 18px; height: 18px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2)); box-shadow: 0 0 0 5px rgba(43,99,255,.10);
+    }
+
+    .skill-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+    .skill-card { padding: 22px; }
+    .skill-card h3 { margin: 0 0 10px; font-size: 18px; }
+    .tags { display: flex; flex-wrap: wrap; gap: 10px; }
+    .tag {
+      padding: 8px 12px; border-radius: 999px; font-size: 13px; font-weight: 700;
+      background: rgba(43,99,255,.08); color: #244fca; border: 1px solid rgba(43,99,255,.14);
+    }
+
+    .contact-panel { display: grid; grid-template-columns: 1.2fr .8fr; gap: 16px; align-items: stretch; }
+    .contact-qrcode { display: flex; align-items: center; justify-content: center; padding: 18px; }
+    .contact-qrcode img { width: 170px; max-width: 100%; border-radius: 18px; border: 1px solid var(--line); }
+    .footer { padding: 38px 0 54px; color: var(--muted); font-size: 14px; }
+
+    @media (max-width: 980px) {
+      .hero-grid, .feature-grid, .fit-grid, .skill-grid, .contact-panel { grid-template-columns: 1fr; }
+      .item-head { flex-direction: column; }
+      .item-meta { text-align: left; white-space: normal; }
+    }
+    @media (max-width: 680px) {
+      .hero { padding-top: 34px; }
+      .hero-main, .card, .feature-card, .fit-card, .skill-card, .hero-side { padding: 20px; }
+      .mini-grid, .contact-actions { grid-template-columns: 1fr 1fr; }
+      .nav { align-items: start; }
+      .nav-links { gap: 6px; }
+      .nav-links a { padding: 6px 10px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <div class="container nav">
+      <div class="brand">袁方旭</div>
+      <div class="nav-links">
+        <a href="#about">首页</a>
+        <a href="#fit">岗位匹配</a>
+        <a href="#featured">精选项目</a>
+        <a href="#experience">完整经历</a>
+        <a href="#skills">技能</a>
+        <a href="#contact">联系</a>
+      </div>
+    </div>
+  </div>
+
+  <header class="hero" id="about">
+    <div class="container hero-grid">
+      <div class="panel hero-main">
+        <div class="eyebrow">AI产品实习生方向</div>
+        <h1>袁方旭</h1>
+        <p class="subtitle">国际关系背景 × Agent场景调研 × Prompt工具化 × 数据分析</p>
+        <p class="hero-summary">国际关系背景，具备 Agent 场景评测、Prompt 工具化、数据建模与高强度信息处理能力，能够将政策研究经验迁移至 AI 产品评估、研究支持与数据驱动分析场景。</p>
+        <div class="quick-tags">
+          <span class="quick-tag">Agent 场景调研</span>
+          <span class="quick-tag">Prompt 结构化提取</span>
+          <span class="quick-tag">数据清洗与建模</span>
+          <span class="quick-tag">政策与治理议题理解</span>
+        </div>
+        <div class="hero-actions">
+          <a class="btn primary" href="#contact">联系我</a>
+          <a class="btn secondary" href="#featured">查看精选项目</a>
+          <a class="btn secondary" href="./yuan_fangxu_resume.docx" download>下载简历</a>
+        </div>
+      </div>
+
+      <aside class="panel hero-side">
+        <div class="contact-card">
+          <h3>联系方式</h3>
+          <div class="contact-list">
+            <div class="contact-item">
+              <div class="contact-label">电话</div>
+              <div class="contact-value">+86-18810856175</div>
+            </div>
+            <div class="contact-item">
+              <div class="contact-label">邮箱</div>
+              <div class="contact-value">fangxu.yuan2021@gmail.com</div>
+            </div>
+            <div class="contact-item">
+              <div class="contact-label">求职方向</div>
+              <div class="contact-value">AI产品实习生｜6个月</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="contact-actions">
+          <button class="btn secondary" onclick="copyText('fangxu.yuan2021@gmail.com','邮箱已复制')">复制邮箱</button>
+          <button class="btn secondary" onclick="copyText(window.location.href,'网页链接已复制')">复制网页链接</button>
+        </div>
+
+        <div class="mini-grid">
+          <div class="mini-card">
+            <div class="mini-number">80+</div>
+            <div class="mini-text">研究简报与舆情材料</div>
+          </div>
+          <div class="mini-card">
+            <div class="mini-number">20+</div>
+            <div class="mini-text">研究报告输出</div>
+          </div>
+          <div class="mini-card">
+            <div class="mini-number">1400+</div>
+            <div class="mini-text">AidData项目记录清洗</div>
+          </div>
+          <div class="mini-card">
+            <div class="mini-number">2</div>
+            <div class="mini-text">增长方案输出</div>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </header>
+
+  <section id="fit">
+    <div class="container">
+      <div class="section-head">
+        <h2 class="section-title">岗位匹配</h2>
+
+      </div>
+      <div class="fit-grid">
+        <article class="panel fit-card">
+          <h3>场景拆解与机会识别</h3>
+          <p>能够把复杂业务问题拆成用户链路、任务类型与关键节点，识别 Agent 的介入环节、功能边界与落地优先级。</p>
+        </article>
+        <article class="panel fit-card">
+          <h3>Prompt 工具化与结构化处理</h3>
+          <p>能够将固定 Prompt、字段模板与人工复核结合起来，把分散材料转成可比较、可复用、可批量处理的结构化信息。</p>
+        </article>
+        <article class="panel fit-card">
+          <h3>数据清洗、建模与结果解释</h3>
+          <p>具备从问题定义、变量设计到数据清洗、定量分析和结果解释的完整能力，适合评测维度设计与数据驱动判断场景。</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="featured">
+    <div class="container">
+      <div class="section-head">
+        <h2 class="section-title">精选项目</h2>
+
+      </div>
+      <div class="feature-grid">
+        <article class="panel feature-card">
+          <h3>教育科技场景调研与 Agent 产品机会分析</h3>
+          <p>围绕教育科技场景中的用户增长与服务转化问题，通过用户访谈与 Agent 适配评测，识别 AI 产品关键切入点。</p>
+          <div class="highlight-row">
+            <span class="badge">3类用户访谈</span>
+            <span class="badge">4条用户链路</span>
+            <span class="badge">6类高频任务</span>
+            <span class="badge">2版增长方案</span>
+          </div>
+        </article>
+        <article class="panel feature-card">
+          <h3>AidData援助数据分析与外交政策研究</h3>
+          <p>围绕援助项目识别与变量使用问题，对 AidData 数据开展清洗、口径辨析与结构化整理，逐步形成可复用的数据处理与校验流程。</p>
+          <div class="highlight-row">
+            <span class="badge">1400+ 项目记录</span>
+            <span class="badge">10w+ 字资料</span>
+            <span class="badge">20+ 研究报告</span>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="education">
+    <div class="container">
+      <div class="section-head">
+        <h2 class="section-title">教育经历</h2>
+
+      </div>
+      <div class="panel card timeline">
+        <div class="timeline-item">
+          <div class="item-head">
+            <div><h3 class="item-title">中国社会科学院大学（UCASS）｜国际事务与国际关系专业 法学硕士</h3></div>
+            <div class="item-meta">北京｜2025.09 - 2028.07</div>
+          </div>
+          <p class="item-desc">GPA 4.03/5；核心课程包括国际问题前沿、总体国家安全观等。</p>
+        </div>
+        <div class="timeline-item">
+          <div class="item-head">
+            <div><h3 class="item-title">中国社会科学院大学（UCASS）｜国际事务与国际关系专业 法学学士</h3></div>
+            <div class="item-meta">北京｜2021.09 - 2025.07</div>
+          </div>
+          <p class="item-desc">GPA 3.73/4；院级优秀毕业生；核心课程包括大学计算机、国际贸易与投资等。</p>
+        </div>
+        <div class="timeline-item">
+          <div class="item-head">
+            <div><h3 class="item-title">耶鲁大学暑期交换项目</h3></div>
+            <div class="item-meta">2023.07 - 2023.08</div>
+          </div>
+          <p class="item-desc">课程包括高等数学（93）、博弈论（90）等。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="experience">
+    <div class="container">
+      <div class="section-head">
+        <h2 class="section-title">完整经历</h2>
+
+      </div>
+      <div class="cards">
+        <article class="panel card">
+          <div class="item-head">
+            <div>
+              <h3 class="item-title">教育科技场景调研与 Agent 产品机会分析｜实战项目负责人</h3>
+              <p class="item-desc">探究教育科技场景中用户增长与服务转化的关键断点，通过用户访谈与 Agent 适配评测，识别 AI 产品的关键切入点。</p>
+            </div>
+            <div class="item-meta">加州大学伯克利分校哈斯商学院交换项目</div>
+          </div>
+          <div class="metric-row">
+            <span class="metric">3类核心对象</span>
+            <span class="metric">4条用户链路</span>
+            <span class="metric">6类高频任务</span>
+            <span class="metric">4个AI化方向</span>
+          </div>
+          <ul class="bullet-list">
+            <li><strong>问题识别：</strong>基于用户增长链路设计访谈方案，识别课程触达、咨询互动、决策转化等关键节点中的增长断点与 Agent 介入环节。</li>
+            <li><strong>适配评测：</strong>设定标准化 Benchmark，从任务匹配度、响应有效性和使用可行性等维度评估 Agent 在教育场景中的适配表现。</li>
+            <li><strong>方案输出：</strong>梳理功能优先级、用户路径与核心交互节点，明确产品边界与落地顺序，输出 2 版增长方案与 4 个 AI 化方向设想。</li>
+          </ul>
+        </article>
+
+        <article class="panel card">
+          <div class="item-head">
+            <div>
+              <h3 class="item-title">实证研究与数据建模｜科研项目负责人</h3>
+              <p class="item-desc">围绕社会议题开展实证分析，通过变量设计和定量建模训练数据驱动研究能力，为 AI 评估维度设计与结果分析提供支持。</p>
+            </div>
+            <div class="item-meta">北京大学-芝加哥大学暑期交换项目</div>
+          </div>
+          <div class="metric-row">
+            <span class="metric">Stata建模</span>
+            <span class="metric">1w+ 英文论文</span>
+            <span class="metric">优秀论文</span>
+          </div>
+          <ul class="bullet-list">
+            <li><strong>问题界定：</strong>围绕研究议题确定分析问题，搭建研究框架并筛选核心变量，明确研究对象与关键关系。</li>
+            <li><strong>研究设计：</strong>基于研究假设梳理变量关系与作用路径，明确解释变量、被解释变量与控制变量的设定逻辑。</li>
+            <li><strong>数据建模：</strong>使用 Stata 完成数据清洗、变量构建、描述性统计、相关性检验与回归分析，并结合模型结果分析作用方向与影响强度。</li>
+          </ul>
+        </article>
+
+        <article class="panel card">
+          <div class="item-head">
+            <div>
+              <h3 class="item-title">海国图智研究院｜AI辅助政策研究与信息分析研究助理</h3>
+              <p class="item-desc">围绕美国对华政策与中东经济风险议题，用 AI 开展多来源并行追踪、差异归纳与结构化提取，提升复杂信息场景下的批量处理效率。</p>
+            </div>
+            <div class="item-meta">2024.01 - 2025.01</div>
+          </div>
+          <div class="metric-row">
+            <span class="metric">100+ 信息来源</span>
+            <span class="metric">8w+ 字资料</span>
+            <span class="metric">80+ 简报与评论</span>
+          </div>
+          <ul class="bullet-list">
+            <li><strong>并行处理：</strong>使用 Perplexity、ChatGPT 等 AI 工具，对政府官员、权威媒体和知名智库等 100+ 来源开展长期热点追踪与源头定位。</li>
+            <li><strong>Prompt 工具化：</strong>设计固定 Prompt 与字段化提取模板，统一抽取时间、政策动作、影响对象、争议点等关键信息。</li>
+            <li><strong>成果输出：</strong>累计撰写 80+ 份研究简报、舆情材料和时政评论，支持后续政策趋势判断与企业风险识别。</li>
+          </ul>
+        </article>
+
+        <article class="panel card">
+          <div class="item-head">
+            <div>
+              <h3 class="item-title">中国社会科学院｜AidData援助数据分析与外交政策研究</h3>
+              <p class="item-desc">围绕项目识别与变量使用问题，对 AidData 数据开展清洗、口径辨析与结构化整理，逐步形成可复用的数据处理与校验流程。</p>
+            </div>
+            <div class="item-meta">2025.02 - 至今</div>
+          </div>
+          <div class="metric-row">
+            <span class="metric">1400+ 项目记录</span>
+            <span class="metric">10w+ 字资料</span>
+            <span class="metric">20+ 研究报告</span>
+          </div>
+          <ul class="bullet-list">
+            <li><strong>任务拆解：</strong>围绕国际发展援助研究中的项目识别、分类使用与研究适配问题，梳理 AidData 数据库在字段使用与变量构建中的核心难点。</li>
+            <li><strong>数据清洗：</strong>使用 Excel、OpenRefine 与固定 Prompt 完成 AidData 数据清洗、字段整理和格式标准化，并围绕字段匹配、差异归纳与异常识别持续优化处理方案。</li>
+            <li><strong>价值产出：</strong>清洗整理 1400+ 条援助项目记录，撰写研究报告 20+ 篇，支撑后续政策方案筛选与变量构建。</li>
+          </ul>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="skills">
+    <div class="container">
+      <div class="section-head">
+        <h2 class="section-title">技能与工具</h2>
+
+      </div>
+      <div class="skill-grid">
+        <div class="panel skill-card">
+          <h3>AI工具</h3>
+          <div class="tags">
+            <span class="tag">ChatGPT</span>
+            <span class="tag">Perplexity</span>
+            <span class="tag">豆包</span>
+            <span class="tag">文心一言</span>
+            <span class="tag">Sora</span>
+            <span class="tag">Notion AI</span>
+          </div>
+        </div>
+        <div class="panel skill-card">
+          <h3>数据分析</h3>
+          <div class="tags">
+            <span class="tag">Python</span>
+            <span class="tag">Stata</span>
+            <span class="tag">Excel</span>
+            <span class="tag">OpenRefine</span>
+          </div>
+        </div>
+        <div class="panel skill-card">
+          <h3>产品与研究能力</h3>
+          <div class="tags">
+            <span class="tag">Agent 场景调研</span>
+            <span class="tag">Prompt 工具化</span>
+            <span class="tag">用户访谈</span>
+            <span class="tag">Benchmark 设计</span>
+            <span class="tag">结构化提取</span>
+          </div>
+        </div>
+        <div class="panel skill-card">
+          <h3>语言与组织</h3>
+          <div class="tags">
+            <span class="tag">雅思 7.5</span>
+            <span class="tag">CET4 649</span>
+            <span class="tag">CET6 571</span>
+            <span class="tag">学生会主席团成员</span>
+            <span class="tag">中国发展高层论坛志愿者</span>
+            <span class="tag">中希青年使者交流学习计划</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="container">
+      <div class="section-head">
+        <h2 class="section-title">联系我</h2>
+
+      </div>
+      <div class="contact-panel">
+        <div class="panel card">
+          <div class="contact-list">
+            <div class="contact-item">
+              <div class="contact-label">邮箱</div>
+              <div class="contact-value"><a href="mailto:fangxu.yuan2021@gmail.com">fangxu.yuan2021@gmail.com</a></div>
+            </div>
+            <div class="contact-item">
+              <div class="contact-label">电话</div>
+              <div class="contact-value"><a href="tel:+8618810856175">+86-18810856175</a></div>
+            </div>
+            <div class="contact-item">
+              <div class="contact-label">简历下载</div>
+              <div class="contact-value"><a href="./yuan_fangxu_resume.docx" download>点击下载 Word 简历</a></div>
+            </div>
+          </div>
+          <div class="hero-actions">
+            <button class="btn secondary" onclick="copyText('fangxu.yuan2021@gmail.com','邮箱已复制')">复制邮箱</button>
+            <button class="btn secondary" onclick="copyText(window.location.href,'网页链接已复制')">复制网页链接</button>
+          </div>
+        </div>
+        <div class="panel contact-qrcode">
+          <img id="siteQr" src="./yuan_fangxu_contact_qr.png" alt="个人网站二维码" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">© 2026 袁方旭｜AI产品方向个人网站</div>
+  </footer>
+
+  <script>
+    function copyText(text, message) {
+      navigator.clipboard.writeText(text).then(() => {
+        alert(message);
+      }).catch(() => {
+        const temp = document.createElement('textarea');
+        temp.value = text;
+        document.body.appendChild(temp);
+        temp.select();
+        document.execCommand('copy');
+        document.body.removeChild(temp);
+        alert(message);
+      });
+    }
+  </script>
+</body>
+</html>
